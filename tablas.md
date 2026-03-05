@@ -29,24 +29,3 @@ Este documento define la estructura, el origen y el propósito de las variables 
 | **`achieved`** | `Integer` | Número total de logros que el usuario ha desbloqueado satisfactoriamente. |
 | **`total_achievements`** | `Integer` | Número total de logros disponibles para ese `appid` específico. |
 | **`completion_percentage`** | `Float` | Porcentaje de progreso calculado. Fórmula: $\frac{achieved}{total\_achievements} \times 100$. |
-
----
-
-## 💡 Notas para el Análisis (Insights)
-
-Como analista, puedes derivar las siguientes métricas calculadas a partir de esta tabla:
-
-1.  **Ratio de Abandono:** Usuarios con un `playtime_forever` alto pero un `completion_percentage` bajo (indica juegos tipo "endless" o dificultad excesiva).
-2.  **Churn Rate Potencial:** Si el `playtime_2weeks` es 0 pero el `playtime_forever` es alto, el jugador ha pausado su actividad en ese título.
-3.  **Conversión a Horas:** Divide siempre los campos de *playtime* entre 60 para normalizar las visualizaciones en horas, lo cual es el estándar de la industria.
-
----
-
-## 📊 Ejemplo de Visualización Recomendada
-
-Para un análisis rápido de tu base de datos, te sugiero un gráfico de dispersión con una relación de aspecto de **(7, 4)**:
-
-* **Eje X:** `playtime_forever` (en horas).
-* **Eje Y:** `completion_percentage`.
-* **Color:** `has_community_visible_stats` (para ver si los jugadores competitivos juegan más tiempo).
-
