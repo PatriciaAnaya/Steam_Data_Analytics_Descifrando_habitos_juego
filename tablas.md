@@ -29,3 +29,23 @@ Este documento define la estructura, el origen y el propósito de las variables 
 | **`achieved`** | `Integer` | Número total de logros que el usuario ha desbloqueado satisfactoriamente. |
 | **`total_achievements`** | `Integer` | Número total de logros disponibles para ese `appid` específico. |
 | **`completion_percentage`** | `Float` | Porcentaje de progreso calculado. Fórmula: $\frac{achieved}{total\_achievements} \times 100$. |
+
+
+# Diccionario de Datos: `juegos_maestro`
+
+Este conjunto de datos actúa como la **Tabla de Dimensión de Juegos** principal en el modelo relacional de Power BI. Proporciona el contexto detallado para cada título y se relaciona con la tabla de actividad del usuario (logs/playtime) mediante el campo `appid`.
+
+| Columna | Tipo de Dato | Descripción | Regla de Negocio / Limpieza |
+| :--- | :--- | :--- | :--- |
+| **`appid`** | `Integer` | ID único del juego en Steam. | **Clave Primaria**. No admite duplicados. |
+| **`name`** | `String` | Nombre oficial del videojuego. | Nombre tal cual aparece en la tienda. |
+| **`developer`** | `String` | Estudio desarrollador. | Se extrae únicamente el primer estudio de la lista. |
+| **`price`** | `Decimal` | Precio de venta del juego. | Los juegos "Gratis" o sin precio definido se marcan como **0**. |
+| **`genre`** | `String` | Género principal asignado. | Enriquecido con **Ollama**. |
+| **`is_free`** | `Boolean` | Indicador de gratuidad. | `True` si el juego es Free-to-Play. |
+| **`metacritic_score`** | `Integer` | Puntuación de la crítica (0-100). | El valor **0** representa la ausencia de puntuación oficial. |
+| **`total_recommendations`** | `Integer` | Conteo de reseñas positivas. | Métrica de popularidad histórica en Steam. |
+| **`playtime_hours`** | `Decimal` | Tiempo total de juego en horas. | Calculado como: `playtime_forever / 60`. |
+| **`adult_descriptorids`** | `Boolean` | Flag de contenido sensible. | **True** si contiene descriptores de contenido adulto; **False** si es familiar. |
+| **`country`** | `Boolean` | Pais residente de los estudios desarrolladores | Enriquecido con **Ollama** |
+---
